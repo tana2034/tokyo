@@ -3,13 +3,18 @@ package controllers;
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
+import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import play.mvc.*;
 
-import services.ResourceAccessor;
 import views.html.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -28,17 +33,19 @@ public class HomeController extends Controller {
     }
 
     public Result getFlickrImage() throws FlickrException {
-
-        ResourceAccessor accessor = new ResourceAccessor("flickr");
-        String apiKey = accessor.getValue("key");
-        String sharedSecret = accessor.getValue("secret");
+        Config conf = ConfigFactory.load();
+        String apiKey = conf.getString("flickrApi.key");
+        String sharedSecret = conf.getString("flickrApi.secret");
 
         Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
         PhotosInterface pi = flickr.getPhotosInterface();
         SearchParameters params = new SearchParameters();
-        params.setMachineTags(new String[]{"浅草"});
-        PhotoList pl = pi.search(params, 1, 1);
-
-        return ok();
+        params.setTags(new String[]{"浅草"});
+        PhotoList<Photo> pl = pi.search(params, 10, 1);
+        List list = new ArrayList<String>();
+        for (Photo photo : pl) {
+            list.add(photo.getMediumUrl());
+        }
+        return ok(index.render(list.toString()));
     }
 }
