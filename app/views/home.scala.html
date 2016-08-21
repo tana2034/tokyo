@@ -1,0 +1,30 @@
+@(places: String)
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>東京写真</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/reset.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/home.css")">
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">
+            <a href="/">東京写真</a>
+        </h1>
+    </header>
+    <div class="wrapper clearfix">
+        <main class="main">
+          <!--  <script src="@*routes.WebJarAssets.at(WebJarAssets.locate("react-with-addons.min.js"))">*@</script> -->
+          <!--    <script src="@*routes.Assets.at("javascripts/components/App.js")">*@</script>-->
+            a
+          </main>
+          <div class="menu">
+              @places
+          </div>
+      </div>
+      <footer class="footer">
+      </footer>
+  </body>
+  </html>

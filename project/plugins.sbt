@@ -20,3 +20,6 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-play-enhancer" % "1.1.0")
 // enablePlugins(PlayEbean).
 // addSbtPlugin("com.typesafe.sbt" % "sbt-play-ebean" % "1.0.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-play-ebean" % "3.0.0")
+
+// add react.js
+addSbtPlugin("com.github.ddispaltro" % "sbt-reactjs" % "0.6.8")

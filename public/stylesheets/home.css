@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+html {
+    font-size: 62.5%;
+}
+body {
+    color: #333;
+    font-size: 1.2rem;
+    font-family: "Yu Mincho", "Meiryo", "Hiragino Kaku Gothic Pro", san-serif;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+a:link, a:visited, a:active {
+    color: #d03c56;
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+}
+.wrapper {
+    width: 970px;
+    margin: 30px auto 40px;
+}
+.main {
+    display: block;
+    float: left;
+    width: 660px;
+}
+.menu {
+    float: right;
+    width: 275px;
+}
+.footer {
+    width: 100%;
+}
+.clearfix::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.logo {
+    width: 420px;
+    height: 121px;
+    margin: 0 auto;
+    background: url('../images/logo.png') no-repeat;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+.logo a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
