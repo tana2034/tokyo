@@ -13,6 +13,7 @@ libraryDependencies ++= Seq(
   javaWs,
   "org.postgresql" % "postgresql" % "9.3-1101-jdbc41",
   "org.webjars" %% "webjars-play" % "2.5.0",
+  "org.webjars" % "jquery" % "3.1.0",
   "org.webjars" % "react" % "15.2.1"
 )
 

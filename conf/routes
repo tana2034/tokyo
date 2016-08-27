@@ -4,6 +4,8 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.home
+# 地名の取得
+GET     /places                     controllers.HomeController.places
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code

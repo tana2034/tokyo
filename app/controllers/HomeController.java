@@ -32,8 +32,12 @@ public class HomeController extends Controller {
     WebJarAssets webJarAssets;
 
     public Result home() {
+        return ok(home.render(webJarAssets));
+    }
+
+    public Result places() {
         List<Place> places = new Finder<String, Place>(Place.class).all();
-        return ok(home.render(webJarAssets,toJson(places).toString()));
+        return ok(toJson(places));
     }
 
     /**

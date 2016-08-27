@@ -8,3 +8,6 @@ target
 /RUNNING_PID
 flickr.conf
 database.conf
+/.eslintrc
+/.eslintrc.json
+node_modules
