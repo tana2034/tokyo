@@ -17,6 +17,7 @@ import static play.libs.Json.toJson;
 import views.html.home;
 import views.html.index;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,12 @@ import java.util.List;
  */
 public class HomeController extends Controller {
 
+    @Inject
+    WebJarAssets webJarAssets;
+
     public Result home() {
         List<Place> places = new Finder<String, Place>(Place.class).all();
-        return ok(home.render(toJson(places).toString()));
+        return ok(home.render(webJarAssets,toJson(places).toString()));
     }
 
     /**

@@ -1,4 +1,7 @@
-React.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById("application")
-);
+var HelloMessage = React.createClass({
+  render: function() {
+    return (<h1>Hello World!</h1>);
+  }
+});
+
+ReactDOM.render(<HelloMessage />, document.getElementById('application'));
