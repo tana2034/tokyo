@@ -1,19 +1,34 @@
 var Place = React.createClass({
+  getInitialState: function() {
+    return {selectedId: ''};
+  },
+  handleClick: function(e) {
+    e.preventDefault();
+    this.setState({selectedId: e.target.name});
+    this.props.onClickPlaceName({selectedId: this.state.selectId});
+  },
   render: function() {
     return (
       <li className="place">
-        {this.props.children}
+        <input
+          type="button"
+          onClick={this.handleClick}
+          value={this.props.placeName}
+          name={this.props.id}>
+        </input>
       </li>
     );
   }
 });
 
 var PlaceList = React.createClass({
+  handleClickPlaceName: function(selectedId) {
+    this.props.onClickPlaceNameBox(selectedId);
+  },
   render: function() {
     var placeNodes = this.props.data.map(function (places) {
       return (
-        <Place placeNameAlpha={places.placeNameAlpha}>
-          {places.placeName}
+        <Place id={places.id} placeName={places.placeName} onClickPlaceName={this.handleClickPlaceName}>
         </Place>
       );
     });
@@ -46,16 +61,14 @@ var PlaceBox = React.createClass({
     this.loadCommentsFromServer();
     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
+  handleClickPlaceNameOnBox: function(id) {
+    this.props.onClickPlaceNameMenu(id);
+  },
   render: function() {
     return (
       <div className="placeBox">
-        <PlaceList data={this.state.data} />
+        <PlaceList data={this.state.data} onClickPlaceNameBox={this.handleClickPlaceNameOnBox} />
       </div>
     );
   }
 });
-
-ReactDOM.render(
-  <PlaceBox url="/places" pollInterval={10000}/>,
-  document.getElementById('menu-content')
-);

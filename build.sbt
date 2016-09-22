@@ -14,7 +14,10 @@ libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % "9.3-1101-jdbc41",
   "org.webjars" %% "webjars-play" % "2.5.0",
   "org.webjars" % "jquery" % "3.1.0",
-  "org.webjars" % "react" % "15.2.1"
+  "org.webjars" % "react" % "15.2.1",
+  "org.webjars" % "react-redux" % "4.4.5",
+  "org.webjars" % "redux" % "3.4.0",
+  "org.webjars.npm" % "redux-thunk" % "2.1.0"
 )
 
 routesGenerator := InjectedRoutesGenerator

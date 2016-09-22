@@ -76,3 +76,10 @@ a:link, a:visited, a:active {
     color: #aaa;
     vertical-align: 20px;
 }
+.placeBox .placeList .place a {
+    display: block;
+    transition: opacity 0.15s;
+}
+.placeBox .placeList .place a:hover {
+    opacity: 0.8;
+}
