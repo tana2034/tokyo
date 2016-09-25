@@ -14,6 +14,7 @@ const initialState = {
 
 // createStore（）メソッドを使ってStoreの作成
 const store = Redux.createStore(reducer, initialState, Redux.applyMiddleware(ReduxThunk.default.withExtraArgument));
+store.subscribe(() => console.log(store.getState()))
 
 /* Actionの実装 */
 
@@ -24,6 +25,7 @@ const ACTION_IMAGES = 'IMAGES';
 
 // Action Creators
 function places(value) {
+  alert("places" + value);
   // Action
   return {
     type: ACTION_PLACES,
@@ -31,17 +33,25 @@ function places(value) {
   };
 }
 
-function getPlacesAsync() {
-  return dispatch => {
-    fetch(`/places`, (response) => {
-      if(response.status == 200){
-        dispatch(places(response.json)); // Use a normal function to set the received state
-      } else {
-        dispatch();
-      }
-    }
-  );};
+function fetchPlaces() {
+  return fetch("/places");
 }
+
+function getPlacesAsync() {
+  return function (dispatch) {
+    fetchPlaces().then(
+      function(response) {
+        alert(response);
+        return response.json();
+    }).then(
+      function(json) {
+        alert(json);
+        return dispatch(places(json));
+      }
+    );
+  }
+}
+
 
 function place(value) {
   // Action
@@ -66,36 +76,17 @@ function reducer(state, action) {
       return Object.assign({}, state, {
         place: action.value,
       });
-    case 'ACTION_PLACES':
+    case 'PLACES':
       return Object.assign({}, state, {
         places: action.value,
       });
-    case 'ACTION_IMAGES':
+    case 'IMAGES':
       return Object.assign({}, state, {
         images: action.value,
       });
     default:
       return state;
   }
-}
-
-// Connect to Redux
-function mapStateToProps(state) {
-  return {
-    places: state.places,
-    place: state.place,
-    images: state.images
-  };
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    onClick(value) {
-      dispatch(images(value));
-    },
-    onLoad() {
-      dispatch(getPlacesAsync());
-    }
-  };
 }
 
 // View (Container Components)
@@ -162,6 +153,26 @@ var DisplayImages = React.createClass({
     );
   }
 });
+
+// Connect to Redux
+const mapStateToProps = (state) => {
+  return {
+    places: state.places,
+    place: state.place,
+    images: state.images
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick: (value) => {
+      dispatch(images(value));
+    },
+    onLoad: () => {
+      dispatch(getPlacesAsync());
+    }
+  };
+};
 
 const TokyoContainer = ReactRedux.connect(
   mapStateToProps,
