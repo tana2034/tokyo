@@ -7,9 +7,9 @@
 
 // 初期state変数（initialState）の作成
 const initialState = {
-  places: null,
-  place: null,
-  images: null
+  places: [],
+  place: '',
+  images: ''
 };
 
 // createStore（）メソッドを使ってStoreの作成
@@ -115,7 +115,7 @@ var Places = React.createClass({
   loadPlacesFromServer: function() {
     this.props.onLoad();
   },
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.loadPlacesFromServer();
   },
   render: function() {
