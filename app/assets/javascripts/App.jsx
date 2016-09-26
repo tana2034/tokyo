@@ -11,25 +11,22 @@ const initialState = {
   place: '',
   images: ''
 };
-
-// createStore（）メソッドを使ってStoreの作成
-const store = Redux.createStore(reducer, initialState, Redux.applyMiddleware(ReduxThunk.default.withExtraArgument));
-store.subscribe(() => console.log(store.getState()))
-
-/* Actionの実装 */
-
 // Action名の定義
 const ACTION_PLACES = 'PLACES';
 const ACTION_PLACE = 'PLACE';
 const ACTION_IMAGES = 'IMAGES';
 
+// createStore（）メソッドを使ってStoreの作成
+const store = Redux.applyMiddleware(ReduxThunk.default)(Redux.createStore)(reducer);
+store.subscribe(() => console.log(store.getState()))
+
+/* Actionの実装 */
+
 // Action Creators
 function places(value) {
-  alert("places" + value);
-  // Action
   return {
     type: ACTION_PLACES,
-    value,
+    value
   };
 }
 
@@ -38,20 +35,12 @@ function fetchPlaces() {
 }
 
 function getPlacesAsync() {
-  return function (dispatch) {
-    fetchPlaces().then(
-      function(response) {
-        alert(response);
-        return response.json();
-    }).then(
-      function(json) {
-        alert(json);
-        return dispatch(places(json));
-      }
-    );
-  }
+  return dispatch => {
+    return fetchPlaces()
+      .then(response => response.json())
+      .then(json => dispatch(places(json)));
+  };
 }
-
 
 function place(value) {
   // Action
@@ -70,17 +59,17 @@ function images(value) {
 }
 
 // Reducer (複数可)
-function reducer(state, action) {
+function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'PLACE':
+    case ACTION_PLACE:
       return Object.assign({}, state, {
         place: action.value,
       });
-    case 'PLACES':
+    case ACTION_PLACES:
       return Object.assign({}, state, {
         places: action.value,
       });
-    case 'IMAGES':
+    case ACTION_IMAGES:
       return Object.assign({}, state, {
         images: action.value,
       });
@@ -94,7 +83,6 @@ var HomeContainer = React.createClass({
   render: function() {
     return (
       <div>
-  //      <DisplayImages handleClick={this.props.onClick} />
         <DisplayImages data={this.props.images}/>
         <Places onLoad={this.props.onLoad} data={this.props.places} handleClick={this.props.onClick} place={this.props.place}/>
       </div>)
@@ -135,11 +123,7 @@ var Place = React.createClass({
   render: function() {
     return (
       <li className="place">
-        <link
-          onClick={(event) => this.handleClick(event)}
-          value={this.props.placeName}
-          name={this.props.id}>
-        </link>
+        {this.props.placeName}
       </li>
     );
   }
