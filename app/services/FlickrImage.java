@@ -30,7 +30,8 @@ public class FlickrImage {
         PhotosInterface pi = flickr.getPhotosInterface();
         SearchParameters params = new SearchParameters();
         params.setTags(keyword);
-        PhotoList<Photo> pl = pi.search(params, 10, 1);
+        params.setSafeSearch(Flickr.SAFETYLEVEL_SAFE);
+        PhotoList<Photo> pl = pi.search(params, 20, 1);
 
         List<Map<String, String>> photoUrlList = new ArrayList<>();
         for (Photo pt : pl) {

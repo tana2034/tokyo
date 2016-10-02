@@ -146,8 +146,13 @@ var Place = React.createClass({
 // View (Presentational Components)
 var DisplayImages = React.createClass({
   render: function() {
+    var imageNodes = this.props.data.map(function (images) {
+      return (
+        <img src={images.mediumUrl}></img>
+      );
+    });
     return (
-      <div>{this.props.data}</div>
+      <div className="main">{imageNodes}</div>
     );
   }
 });
