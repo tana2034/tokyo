@@ -151,7 +151,11 @@ var DisplayImages = React.createClass({
       );
     });
     return (
-      <div className="main">{imageNodes}</div>
+      <div className="main">
+        <div className="items">
+        {imageNodes}
+        </div>
+      </div>
     );
   }
 });

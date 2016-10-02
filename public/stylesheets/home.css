@@ -20,17 +20,19 @@ a:link, a:visited, a:active {
     width: 100%;
 }
 .wrapper {
-    width: 970px;
+/*    width: 970px; */
     margin: 30px auto 40px;
 }
 .main {
     display: block;
     float: left;
-    width: 660px;
+    width: 80%;
+/*    width: 660px; */
 }
 .menu {
     float: right;
-    width: 275px;
+    width: 20%;
+/*    width: 275px; */
 }
 .footer {
     width: 100%;
@@ -81,7 +83,28 @@ a:link, a:visited, a:active {
 }
 
 
-.item {
+.main .items {
+  display:-webkit-box;
+  display:-moz-box;
+  display:-webkit-flexbox;
+  display:-moz-flexbox;
+  display:-ms-flexbox;
+  display:-webkit-flex;
+  display:-moz-flex;
+  display:flex;
+  display:inline-flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 500vw; /* ビューポート(幅)を基準に表示高を指定 */
+}
+
+.main .items .item {
   width: 516px;
   margin-bottom: 4px;
   padding: 8px;
@@ -90,19 +113,19 @@ a:link, a:visited, a:active {
   background-color: #fff;
 }
 
-.item .image {
+.main .items .item .image {
   display: block;
   width: 100%;
 }
 
-.item .title {
+.main .items .item .title {
   margin:15px 9px 10px;
   color: #aaa;
   letter-spacing: 1px;
   font-family: "Meiryo", "Hiragino Kaku Gothic Pro", san-serif;
 }
 
-.item .title::before {
+.main .items .item .title::before {
   content: '';
   display: inline-block;
   width: 19px;
@@ -113,12 +136,12 @@ a:link, a:visited, a:active {
   vertical-align: -5px;
 }
 
-.item .description {
+.main .items .item .description {
   margin: 10px;
   line-height: 1.5;
 }
 
-.item > a {
+.main .items .item > a {
   display: block;
   margin: -8px -8px -11px;
   padding: 8px 8px 11px;
@@ -127,7 +150,7 @@ a:link, a:visited, a:active {
   transition: all 0.3s;
 }
 
-.item > a:hover {
+.main .items .item > a:hover {
   box-shadow: 0 0 6px -1px rgba(0, 0, 0, 0.3);
   opacity: 0.8;
 }
