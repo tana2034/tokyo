@@ -113,8 +113,7 @@ var Places = React.createClass({
     var handleClick = this.props.handleClick;
     var placeNodes = this.props.data.map(function (places) {
       return (
-        <Place id={places.id} placeName={places.placeName} onClickPlaceName={handleClick}>
-        </Place>
+        <Place id={places.id} placeName={places.placeName} onClickPlaceName={handleClick} key={places.id}/>
       );
     });
     return (
@@ -148,13 +147,7 @@ var DisplayImages = React.createClass({
   render: function() {
     var imageNodes = this.props.data.map(function (images) {
       return (
-        <section className="item">
-          <a href={images.url} target="_blank">
-            <img src={images.mediumUrl}></img>
-            <div className="title">{images.title}</div>
-            <p className="description">{images.description}{images.license}</p>
-          </a>
-        </section>
+        <Image key={images.url} url={images.url} mediumUrl={images.mediumUrl} title={images.title} description={images.description} license={images.license}/>
       );
     });
     return (
@@ -162,6 +155,20 @@ var DisplayImages = React.createClass({
     );
   }
 });
+
+var Image = React.createClass({
+  render:function() {
+    return (
+      <section className="item">
+        <a href={this.props.url} target="_blank">
+          <img src={this.props.mediumUrl}></img>
+          <div className="title">{this.props.title}</div>
+          <p className="description">{this.props.description}{this.props.license}</p>
+        </a>
+      </section>
+    );
+  }
+})
 
 // Connect to Redux
 const mapStateToProps = (state) => {
