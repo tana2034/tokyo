@@ -101,11 +101,13 @@ a:link, a:visited, a:active {
   -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  height: 500vw; /* ビューポート(幅)を基準に表示高を指定 */
+  /* height: 100vw; ビューポート(幅)を基準に表示高を指定 */
+  width: inherit;
+  height: 100vw;
 }
 
 .main .items .item {
-  width: 516px;
+  width: 336px;
   margin-bottom: 4px;
   padding: 8px;
   border-bottom: 3px solid;

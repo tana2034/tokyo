@@ -147,7 +147,7 @@ var DisplayImages = React.createClass({
   render: function() {
     var imageNodes = this.props.data.map(function (images) {
       return (
-        <Image key={images.url} url={images.url} mediumUrl={images.mediumUrl} title={images.title} description={images.description} license={images.license}/>
+        <Image key={images.url} url={images.url} mediumUrl={images.mediumUrl} small320url={images.small320url} title={images.title} description={images.description} license={images.license}/>
       );
     });
     return (
@@ -165,7 +165,7 @@ var Image = React.createClass({
     return (
       <section className="item">
         <a href={this.props.url} target="_blank">
-          <img src={this.props.mediumUrl}></img>
+          <img src={this.props.small320url}></img>
           <div className="title">{this.props.title}</div>
           <p className="description">{this.props.description}{this.props.license}</p>
         </a>
