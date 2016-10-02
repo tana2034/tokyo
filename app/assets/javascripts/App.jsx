@@ -9,7 +9,7 @@
 const initialState = {
   places: [],
   place: '',
-  images: ''
+  images: []
 };
 // Action名の定義
 const ACTION_PLACES = 'PLACES';
@@ -42,6 +42,18 @@ function getPlacesAsync() {
   };
 }
 
+function fetchPlace(id) {
+  return fetch("/place/" + id);
+}
+
+function getPlaceAsync(id) {
+  return dispatch => {
+    return fetchPlace(id)
+      .then(response => response.json())
+      .then(json => dispatch(images(json)));
+  }
+}
+
 function place(value) {
   // Action
   return {
@@ -54,7 +66,7 @@ function images(value) {
   // Action
   return {
     type: ACTION_IMAGES,
-    value,
+    value
   }
 }
 
@@ -98,32 +110,34 @@ var Places = React.createClass({
     this.loadPlacesFromServer();
   },
   render: function() {
+    var handleClick = this.props.handleClick;
     var placeNodes = this.props.data.map(function (places) {
       return (
-        <Place id={places.id} placeName={places.placeName} onClickPlaceName={this.handleClickPlaceName}>
+        <Place id={places.id} placeName={places.placeName} onClickPlaceName={handleClick}>
         </Place>
       );
     });
     return (
-      <ul className="placeList">
-        {placeNodes}
-      </ul>
+      <div className="menu">
+        <ul className="placeList">
+          {placeNodes}
+        </ul>
+      </div>
     );
   }
 });
 
 // View (Presentational Components)
 var Place = React.createClass({
-  // このクリックをActionとかでなんとかしないといけない
   handleClick: function(e) {
     e.preventDefault();
-    this.props.handleClick(this.props.id);
+    this.props.onClickPlaceName(this.props.id);
     return;
   },
   render: function() {
     return (
       <li className="place">
-        {this.props.placeName}
+        <a href="#" onClick={this.handleClick}>{this.props.placeName}</a>
       </li>
     );
   }
@@ -150,7 +164,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onClick: (value) => {
-      dispatch(images(value));
+      dispatch(getPlaceAsync(value));
     },
     onLoad: () => {
       dispatch(getPlacesAsync());

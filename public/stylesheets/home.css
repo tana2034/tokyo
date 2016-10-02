@@ -55,20 +55,16 @@ a:link, a:visited, a:active {
     height: 100%;
 }
 
-.PlaceBox {
-}
-.placeBox .text {
+.placeList {
     display: inline-block;
     width: 182px;
     color: #000;
     vertical-align: top;
-    line-height: 1.5
-}
-.placeBox .placeList {
+    line-height: 1.5;
     margin-bottom: 30px;
     list-style-type: none;
 }
-.placeBox .placeList .place {
+.placeList .place {
     transition: opacity 0.15s;
     display: inline-block;
     margin: 0 10px;
@@ -76,10 +72,10 @@ a:link, a:visited, a:active {
     color: #aaa;
     vertical-align: 20px;
 }
-.placeBox .placeList .place a {
+.placeList .place a {
     display: block;
     transition: opacity 0.15s;
 }
-.placeBox .placeList .place a:hover {
+.placeList .place a:hover {
     opacity: 0.8;
 }
