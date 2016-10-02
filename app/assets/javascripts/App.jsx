@@ -1,7 +1,7 @@
-//import React from 'react';
-//import ReactDOM from 'react-dom';
-//import { createStore } from 'redux';
-//import { Provider, connect } from 'react-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
 
 /* Storeの実装 */
 
@@ -179,8 +179,8 @@ const TokyoContainer = ReactRedux.connect(
 
 // Rendering
 ReactDOM.render(
-  <ReactRedux.Provider store={store}>
+  <Provider store={store}>
     <TokyoContainer />
-  </ReactRedux.Provider>,
+  </Provider>,
   document.getElementById("content")
 );

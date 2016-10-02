@@ -3,7 +3,13 @@ name := """tokyo"""
 version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
-lazy val myProject = (project in file(".")).enablePlugins(PlayJava, PlayEbean)
+lazy val myProject = (project in file("."))
+  .enablePlugins(PlayJava, PlayEbean)
+  .settings(
+    ReactJsKeys.harmony := true,
+    ReactJsKeys.es6module := true,
+    ReactJsKeys.stripTypes := true
+  )
 
 scalaVersion := "2.11.7"
 
@@ -21,3 +27,6 @@ libraryDependencies ++= Seq(
 )
 
 routesGenerator := InjectedRoutesGenerator
+
+import play.sbt.PlayImport.PlayKeys.playRunHooks
+playRunHooks <+= baseDirectory.map(base => Gulp(base, "build"))
