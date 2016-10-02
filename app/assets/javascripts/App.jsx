@@ -1,6 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createClass } from 'react';
+import { render } from 'react-dom';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 /* Storeの実装 */
@@ -17,7 +17,7 @@ const ACTION_PLACE = 'PLACE';
 const ACTION_IMAGES = 'IMAGES';
 
 // createStore（）メソッドを使ってStoreの作成
-const store = Redux.applyMiddleware(ReduxThunk.default)(Redux.createStore)(reducer);
+const store = applyMiddleware(ReduxThunk.default)(createStore)(reducer);
 store.subscribe(() => console.log(store.getState()))
 
 /* Actionの実装 */
@@ -91,7 +91,7 @@ function reducer(state = initialState, action) {
 }
 
 // View (Container Components)
-var HomeContainer = React.createClass({
+var HomeContainer = createClass({
   render: function() {
     return (
       <div>
@@ -102,7 +102,7 @@ var HomeContainer = React.createClass({
 });
 
 // View (Presentational Components)
-var Places = React.createClass({
+var Places = createClass({
   loadPlacesFromServer: function() {
     this.props.onLoad();
   },
@@ -127,7 +127,7 @@ var Places = React.createClass({
 });
 
 // View (Presentational Components)
-var Place = React.createClass({
+var Place = createClass({
   handleClick: function(e) {
     e.preventDefault();
     this.props.onClickPlaceName(this.props.id);
@@ -143,7 +143,7 @@ var Place = React.createClass({
 });
 
 // View (Presentational Components)
-var DisplayImages = React.createClass({
+var DisplayImages = createClass({
   render: function() {
     var imageNodes = this.props.data.map(function (images) {
       return (
@@ -160,7 +160,7 @@ var DisplayImages = React.createClass({
   }
 });
 
-var Image = React.createClass({
+var Image = createClass({
   render:function() {
     return (
       <section className="item">
@@ -194,13 +194,13 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const TokyoContainer = ReactRedux.connect(
+const TokyoContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(HomeContainer);
 
 // Rendering
-ReactDOM.render(
+render(
   <Provider store={store}>
     <TokyoContainer />
   </Provider>,
