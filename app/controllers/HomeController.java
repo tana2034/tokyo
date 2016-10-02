@@ -13,6 +13,7 @@ import views.html.home;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -35,7 +36,7 @@ public class HomeController extends Controller {
 
     public Result place(String id) throws FlickrException {
         Place place = new Finder<String, Place>(Place.class).byId(id);
-        PhotoList pl = new FlickrImage().images(new String[] {place.placeName});
+        List<Map<String, String>> pl = new FlickrImage().images(new String[] {place.placeName});
         return ok(toJson(pl));
     }
 }
