@@ -30,18 +30,24 @@ public class FlickrImage {
         PhotosInterface pi = flickr.getPhotosInterface();
         SearchParameters params = new SearchParameters();
         params.setTags(keyword);
-        PhotoList<Photo> pl = pi.search(params, 10, 1);
+        params.setSafeSearch(Flickr.SAFETYLEVEL_SAFE);
+        PhotoList<Photo> pl = pi.search(params, 20, 1);
 
-        List<Map<String, String>> photoUrlList = new ArrayList<>();
+        List<Map<String, String>> photoList = new ArrayList<>();
         for (Photo pt : pl) {
-            Map<String, String> photoUrl = new HashMap<>();
-            photoUrl.put("mediumUrl", pt.getMediumUrl());
-            photoUrlList.add(photoUrl);
+            Map<String, String> propList = new HashMap<>();
+            propList.put("mediumUrl", pt.getMediumUrl());
+            propList.put("small320url", pt.getSmall320Url());
+            propList.put("description", pt.getDescription());
+            propList.put("url", pt.getUrl());
+            propList.put("license", pt.getLicense());
+            propList.put("title", pt.getTitle());
+            photoList.add(propList);
         }
 //        List list = new ArrayList<String>();
 //        for (Photo photo : pl) {
 //            list.add(photo.getMediumUrl());
 //        }
-        return photoUrlList;
+        return photoList;
     }
 }
