@@ -29,4 +29,4 @@ libraryDependencies ++= Seq(
 routesGenerator := InjectedRoutesGenerator
 
 import play.sbt.PlayImport.PlayKeys.playRunHooks
-playRunHooks <+= baseDirectory.map(base => Gulp(base, "build"))
+playRunHooks <+= baseDirectory.map(base => Gulp(base, "watch"))

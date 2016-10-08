@@ -1,9 +1,15 @@
 (function(module) {
   var WEBPACK_CONFIG = {
-    entry: './app/assets/javascripts/App.jsx',
+    src: './app/assets/javascripts/**/*.jsx',
+    entry: {
+      "App": './app/assets/javascripts/App.jsx',
+      "components/Home": './app/assets/javascripts/components/Home.jsx',
+      "components/Image": './app/assets/javascripts/components/Image.jsx',
+      "components/Place": './app/assets/javascripts/components/Place.jsx',
+    },
     dest: './target/web/public/main/app/',
-    output : {
-      filename : 'main.build.js'
+    output: {
+      filename: "[name].js"
     },
     module: {
       loaders: [
