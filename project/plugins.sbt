@@ -23,3 +23,4 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-play-ebean" % "3.0.0")
 
 // add react.js
 addSbtPlugin("com.github.ddispaltro" % "sbt-reactjs" % "0.6.8")
+dependencyOverrides += "org.webjars.npm" % "minimatch" % "3.0.4"
