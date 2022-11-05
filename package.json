@@ -2,7 +2,7 @@
   "name": "test1",
   "version": "0.0.1",
   "dependencies": {
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0"
   },
   "private": true,
